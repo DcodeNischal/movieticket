@@ -95,6 +95,10 @@ if (isset($_SESSION['uid'])) {
               />
             </div>
 
+            <!-- error -->
+
+            <p style="color: red;"><?php echo $error; ?></p>
+
             <input
               type="submit"
               value="Login"
