@@ -1,14 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const movieDetails = JSON.parse(localStorage.getItem('movieDetails'));
-    
-    document.getElementById('movieName').textContent = movieDetails.name;
-    document.getElementById('movieLocation').textContent = movieDetails.location;
-    document.getElementById('movieDate').textContent = movieDetails.date;
-    document.getElementById('movieTime').textContent = movieDetails.time;
-    document.getElementById('movieSeats').textContent = movieDetails.seats.join(', ');
-    document.getElementById('movieTotalPrice').textContent = movieDetails.totalPrice;
+    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats')) || [];
+    const totalPrice = localStorage.getItem('totalPrice') || '0.00';
+    const seatprice = "500"
 
-    document.getElementById('payButton').addEventListener('click', () => {
-        alert('Proceeding to payment gateway');
-    });
+    document.getElementById('selectedSeats').textContent = selectedSeats.join('  ');
+    document.getElementById('seatprice').textContent = 'Rs. ' + seatprice;
+    document.getElementById('numSeats').textContent = selectedSeats.length-1;
+    document.getElementById('totalPrice').textContent = 'Rs. ' + totalPrice;
+    document.getElementById('totalAmount').textContent = 'Rs. ' + totalPrice;
+
+    window.confirmPayment = () => {
+        alert('Payment Confirmed! Total amount paid: Rs. ' + totalPrice);
+        localStorage.clear(); // Clear the local storage after payment
+        window.location.href = "../index.html"; // Redirect to home page or any other page
+    };
+
+    window.goBack = () => {
+        window.history.back();
+    };
 });
